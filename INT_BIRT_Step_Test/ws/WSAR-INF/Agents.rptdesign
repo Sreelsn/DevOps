@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.4.2.3-WDPATCH Build &lt;@BUILD@></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <data-sources>
+        <oda-data-source extensionID="com.workday.bfp.data.oda.report" name="Birt Test" id="104">
+            <property name="SCHEMA">https://wd2-impl-services1.workday.com/ccx/service/customreport2/aig8/FN-impl/Birt_Test?xsd</property>
+            <property name="DATA">report_data_file.xml</property>
+            <property name="VERSION">1.0</property>
+            <property name="SCHEMA_CONTENT">&lt;?xml version='1.0' encoding='UTF-8'?>&lt;xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wd="urn:com.workday.report/RFB_Offer_Letter" xmlns:nyw="urn:com.netyourwork/aod" elementFormDefault="qualified" attributeFormDefault="qualified" targetNamespace="urn:com.workday.report/RFB_Offer_Letter">&lt;xsd:element name="Report_Data" type="wd:Report_DataType"/>&lt;xsd:element name="Execute_Report" type="wd:Execute_ReportType"/>&lt;xsd:simpleType name="RichText">&lt;xsd:restriction base="xsd:string"/>&lt;/xsd:simpleType>&lt;xsd:simpleType name="EmployeeReferenceEnumeration">&lt;xsd:restriction base="xsd:string">&lt;xsd:annotation>&lt;xsd:appinfo>&lt;wd:enumeration xmlns:wd="urn:com.workday/bsvc" value="WID"/>&lt;wd:enumeration xmlns:wd="urn:com.workday/bsvc" value="Employee_ID"/>&lt;/xsd:appinfo>&lt;/xsd:annotation>&lt;/xsd:restriction>&lt;/xsd:simpleType>&lt;xsd:simpleType name="Employee_TypeReferenceEnumeration">&lt;xsd:restriction base="xsd:string">&lt;xsd:annotation>&lt;xsd:appinfo>&lt;wd:enumeration xmlns:wd="urn:com.workday/bsvc" value="WID"/>&lt;wd:enumeration xmlns:wd="urn:com.workday/bsvc" value="Employee_Type_ID"/>&lt;/xsd:appinfo>&lt;/xsd:annotation>&lt;/xsd:restriction>&lt;/xsd:simpleType>&lt;xsd:complexType name="Report_ParametersType">&lt;xsd:sequence>&lt;xsd:element name="Employees" type="wd:EmployeeObjectType" minOccurs="0" maxOccurs="unbounded"/>&lt;/xsd:sequence>&lt;/xsd:complexType>&lt;xsd:complexType name="Report_EntryType">&lt;xsd:sequence>&lt;xsd:element name="Emplid" type="xsd:string" minOccurs="0"/>&lt;xsd:element name="firstName" type="xsd:string" minOccurs="0"/>&lt;xsd:element name="lastName" type="xsd:string" minOccurs="0"/>&lt;xsd:element name="Job_Title" type="xsd:string" minOccurs="0"/>&lt;xsd:element name="Original_Hire_Date" type="xsd:date" minOccurs="0"/>&lt;xsd:element name="Primary_Address" type="xsd:string" minOccurs="0"/>&lt;xsd:element name="Employee_Type" type="wd:Employee_TypeObjectType" minOccurs="0" maxOccurs="unbounded"/>&lt;/xsd:sequence>&lt;/xsd:complexType>&lt;xsd:complexType name="EmployeeObjectType">&lt;xsd:annotation xmlns:wstxns1="urn:com.workday/bsvc" wstxns1:Is_Reference_ID="1"/>&lt;xsd:sequence>&lt;xsd:element name="ID" type="wd:EmployeeObjectIDType" minOccurs="0" maxOccurs="unbounded"/>&lt;/xsd:sequence>&lt;xsd:attribute name="Descriptor" type="xsd:string">&lt;xsd:annotation>&lt;xsd:documentation>Display information used to describe an instance of an object. This 'optional' information is for outbound descriptive purposes only and is not processed on inbound Workday Web Services requests.&lt;/xsd:documentation>&lt;/xsd:annotation>&lt;/xsd:attribute>&lt;/xsd:complexType>&lt;xsd:complexType name="Employee_TypeObjectType">&lt;xsd:annotation xmlns:wstxns2="urn:com.workday/bsvc" wstxns2:Is_Reference_ID="1"/>&lt;xsd:sequence>&lt;xsd:element name="ID" type="wd:Employee_TypeObjectIDType" minOccurs="0" maxOccurs="unbounded"/>&lt;/xsd:sequence>&lt;xsd:attribute name="Descriptor" type="xsd:string">&lt;xsd:annotation>&lt;xsd:documentation>Display information used to describe an instance of an object. This 'optional' information is for outbound descriptive purposes only and is not processed on inbound Workday Web Services requests.&lt;/xsd:documentation>&lt;/xsd:annotation>&lt;/xsd:attribute>&lt;/xsd:complexType>&lt;xsd:complexType name="EmployeeObjectIDType">&lt;xsd:annotation>&lt;xsd:documentation>Contains a unique identifier for an instance of an object.&lt;/xsd:documentation>&lt;/xsd:annotation>&lt;xsd:simpleContent>&lt;xsd:extension base="xsd:string">&lt;xsd:attribute name="type" type="wd:EmployeeReferenceEnumeration" use="required">&lt;xsd:annotation>&lt;xsd:documentation>The unique identifier type. Each "ID" for an instance of an object contains a type and a value. A single instance of an object can have multiple "ID" but only a single "ID" per "type".&lt;/xsd:documentation>&lt;/xsd:annotation>&lt;/xsd:attribute>&lt;/xsd:extension>&lt;/xsd:simpleContent>&lt;/xsd:complexType>&lt;xsd:complexType name="Employee_TypeObjectIDType">&lt;xsd:annotation>&lt;xsd:documentation>Contains a unique identifier for an instance of an object.&lt;/xsd:documentation>&lt;/xsd:annotation>&lt;xsd:simpleContent>&lt;xsd:extension base="xsd:string">&lt;xsd:attribute name="type" type="wd:Employee_TypeReferenceEnumeration" use="required">&lt;xsd:annotation>&lt;xsd:documentation>The unique identifier type. Each "ID" for an instance of an object contains a type and a value. A single instance of an object can have multiple "ID" but only a single "ID" per "type".&lt;/xsd:documentation>&lt;/xsd:annotation>&lt;/xsd:attribute>&lt;/xsd:extension>&lt;/xsd:simpleContent>&lt;/xsd:complexType>&lt;xsd:complexType name="Report_DataType">&lt;xsd:sequence>&lt;xsd:element name="Report_Entry" type="wd:Report_EntryType" minOccurs="0" maxOccurs="unbounded"/>&lt;/xsd:sequence>&lt;/xsd:complexType>&lt;xsd:complexType name="Execute_ReportType">&lt;xsd:sequence>&lt;xsd:element name="Report_Parameters" type="wd:Report_ParametersType" minOccurs="0"/>&lt;xsd:element name="Authentication" type="wd:AuthenticationType" minOccurs="0"/>&lt;/xsd:sequence>&lt;/xsd:complexType>&lt;xsd:complexType name="MoneyType">&lt;xsd:simpleContent>&lt;xsd:extension base="xsd:decimal">&lt;xsd:attribute name="Currency_Code" type="xsd:string"/>&lt;/xsd:extension>&lt;/xsd:simpleContent>&lt;/xsd:complexType>&lt;xsd:complexType name="AuthenticationType">&lt;xsd:sequence>&lt;xsd:element name="Proxy_User_Name" type="xsd:string" minOccurs="0" maxOccurs="1"/>&lt;/xsd:sequence>&lt;/xsd:complexType>&lt;/xsd:schema></property>
+            <property name="REPORT_NAME">Birt Test</property>
+            <property name="ENVIRONMENT">Sandbox</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="com.workday.bfp.data.oda.report.primaryDataSet" name="Data Set" id="210">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">Emplid</property>
+                    <text-property name="displayName">Emplid</text-property>
+                    <text-property name="heading">Emplid</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">firstName</property>
+                    <text-property name="displayName">firstName</text-property>
+                    <text-property name="heading">firstName</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">lastName</property>
+                    <text-property name="displayName">lastName</text-property>
+                    <text-property name="heading">lastName</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Job_Title</property>
+                    <text-property name="displayName">Job Title</text-property>
+                    <text-property name="heading">Job Title</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Original_Hire_Date</property>
+                    <text-property name="displayName">Original Hire Date</text-property>
+                    <text-property name="heading">Original Hire Date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Primary_Address</property>
+                    <text-property name="displayName">Primary Address</text-property>
+                    <text-property name="heading">Primary Address</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Row_Number</property>
+                    <text-property name="displayName">Row Number</text-property>
+                    <text-property name="heading">Row Number</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Emplid</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">firstName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">lastName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Job_Title</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Original_Hire_Date</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">Primary_Address</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">Row_Number</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Birt Test</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Emplid</property>
+                    <property name="nativeName">Emplid</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">firstName</property>
+                    <property name="nativeName">firstName</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">lastName</property>
+                    <property name="nativeName">lastName</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Job_Title</property>
+                    <property name="nativeName">Job_Title</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">Original_Hire_Date</property>
+                    <property name="nativeName">Original_Hire_Date</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">Primary_Address</property>
+                    <property name="nativeName">Primary_Address</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">Row_Number</property>
+                    <property name="nativeName">Row_Number</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">9</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>Emplid</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Emplid</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Emplid</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>firstName</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>firstName</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>firstName</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>lastName</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>lastName</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>lastName</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>Job_Title</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Job Title</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Job Title</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>Original_Hire_Date</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Original Hire Date</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Original Hire Date</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>Primary_Address</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Primary Address</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Primary Address</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>Row_Number</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>9</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Row Number</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Row Number</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab-cell" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="211">
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">Emplid</property>
+                    <text-property name="displayName">Emplid</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Emplid"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">firstName</property>
+                    <text-property name="displayName">firstName</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["firstName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">lastName</property>
+                    <text-property name="displayName">lastName</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["lastName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <text-property name="displayName">Legal Name</text-property>
+                    <expression name="expression" type="javascript">concat(dataSetRow["firstName"],dataSetRow["lastName"])</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
+            <column id="230"/>
+            <column id="231"/>
+            <column id="232"/>
+            <header>
+                <row id="212">
+                    <cell id="213">
+                        <label id="214">
+                            <text-property name="text">Emplid</text-property>
+                        </label>
+                    </cell>
+                    <cell id="215">
+                        <label id="216">
+                            <text-property name="text">firstName</text-property>
+                        </label>
+                    </cell>
+                    <cell id="217">
+                        <label id="218">
+                            <text-property name="text">lastName</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="219">
+                    <cell id="220">
+                        <data id="221">
+                            <property name="resultSetColumn">Emplid</property>
+                        </data>
+                    </cell>
+                    <cell id="222">
+                        <data id="223">
+                            <property name="resultSetColumn">firstName</property>
+                        </data>
+                    </cell>
+                    <cell id="224">
+                        <data id="225">
+                            <property name="resultSetColumn">lastName</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="226">
+                    <cell id="227"/>
+                    <cell id="228"/>
+                    <cell id="229"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

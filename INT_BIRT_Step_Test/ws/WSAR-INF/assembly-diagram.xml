@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wdnm:Diagram xmlns:wdnm="http://workday.com/studio/editors/notation">
+  <element href="assembly.xml#WorkdayAssembly"/>
+  <visualProperties x="-6" y="81">
+    <element href="assembly.xml#StartHere"/>
+  </visualProperties>
+  <visualProperties x="326" y="192">
+    <element href="assembly.xml#ReportInput"/>
+  </visualProperties>
+  <visualProperties x="600" y="302">
+    <element href="assembly.xml#PdfPrintStep"/>
+  </visualProperties>
+  <visualProperties x="462" y="33">
+    <element href="assembly.xml#Splitter"/>
+  </visualProperties>
+  <visualProperties x="593" y="33">
+    <element href="assembly.xml#AsyncMediation0"/>
+  </visualProperties>
+  <visualProperties x="285" y="61">
+    <element href="assembly.xml#WorkdayOutRest"/>
+  </visualProperties>
+  <visualProperties x="135" y="45">
+    <element href="assembly.xml#AsyncMediation"/>
+  </visualProperties>
+  <visualProperties x="813" y="66">
+    <element href="assembly.xml#CallSubRoutine"/>
+  </visualProperties>
+  <visualProperties x="-26" y="299">
+    <element href="assembly.xml#SubRoutine"/>
+  </visualProperties>
+  <visualProperties x="143" y="151">
+    <element href="assembly.xml#Route"/>
+  </visualProperties>
+  <visualProperties x="323" y="335">
+    <element href="assembly.xml#ReportInput0"/>
+  </visualProperties>
+  <visualProperties x="621" y="208">
+    <element href="assembly.xml#PdfPrintStep0"/>
+  </visualProperties>
+  <visualProperties x="802" y="151">
+    <element href="assembly.xml#AsyncMediation1"/>
+  </visualProperties>
+  <visualProperties x="802" y="285">
+    <element href="assembly.xml#AsyncMediation2"/>
+  </visualProperties>
+  <connections type="routesTo">
+    <source href="assembly.xml#//@beans/@mixed.1/@splitter.0/@subRoute.0"/>
+    <target href="assembly.xml#AsyncMediation0"/>
+  </connections>
+  <connections type="routesResponseTo" sourceAnchorX="0.6040268456375839" sourceAnchorY="1.0" targetAnchorX="0.5420560747663551" targetAnchorY="0.11688311688311688">
+    <source href="assembly.xml#WorkdayOutRest"/>
+    <target href="assembly.xml#Splitter"/>
+  </connections>
+  <connections type="routesTo" sourceAnchorX="0.5137614678899083" sourceAnchorY="1.0" targetAnchorX="0.13385826771653545" targetAnchorY="0.5543478260869565">
+    <source href="assembly.xml#StartHere"/>
+    <target href="assembly.xml#AsyncMediation"/>
+  </connections>
+  <connections type="routesTo" sourceAnchorX="1.0" sourceAnchorY="0.7127659574468085" targetAnchorX="0.10067114093959731" targetAnchorY="0.4864864864864865">
+    <source href="assembly.xml#AsyncMediation"/>
+    <target href="assembly.xml#WorkdayOutRest"/>
+  </connections>
+  <connections type="routesTo" sourceAnchorX="1.0" sourceAnchorY="0.2765957446808511" targetAnchorX="0.2152777777777778" targetAnchorY="0.32432432432432434">
+    <source href="assembly.xml#AsyncMediation0"/>
+    <target href="assembly.xml#CallSubRoutine"/>
+  </connections>
+  <connections type="routesTo" sourceAnchorX="0.6885245901639344" sourceAnchorY="1.0" targetAnchorX="0.24299065420560748" targetAnchorY="0.3036649214659686">
+    <source href="assembly.xml#SubRoutine"/>
+    <target href="assembly.xml#Route"/>
+  </connections>
+  <connections type="routesTo" sourceAnchorX="0.6385542168674698" sourceAnchorY="1.0" targetAnchorX="0.07407407407407407" targetAnchorY="0.3723404255319149">
+    <source href="assembly.xml#//@beans/@mixed.1/@route.0/@subRoute.0"/>
+    <target href="assembly.xml#ReportInput"/>
+  </connections>
+  <connections type="routesTo" sourceAnchorX="1.0" sourceAnchorY="0.6176470588235294" targetAnchorX="0.13274336283185842" targetAnchorY="0.48936170212765956">
+    <source href="assembly.xml#//@beans/@mixed.1/@route.0/@subRoute.1"/>
+    <target href="assembly.xml#ReportInput0"/>
+  </connections>
+  <connections type="routesTo" sourceAnchorX="1.0" sourceAnchorY="0.32978723404255317" targetAnchorX="0.184" targetAnchorY="0.08108108108108109">
+    <source href="assembly.xml#ReportInput0"/>
+    <target href="assembly.xml#PdfPrintStep"/>
+  </connections>
+  <connections type="routesTo" sourceAnchorX="1.0" sourceAnchorY="0.3191489361702128" targetAnchorX="0.18181818181818182" targetAnchorY="0.40540540540540543">
+    <source href="assembly.xml#ReportInput"/>
+    <target href="assembly.xml#PdfPrintStep0"/>
+  </connections>
+  <connections type="routesResponseTo" sourceAnchorX="0.7348484848484849" sourceAnchorY="1.0" targetAnchorX="0.23880597014925373" targetAnchorY="0.4148936170212766">
+    <source href="assembly.xml#PdfPrintStep0"/>
+    <target href="assembly.xml#AsyncMediation1"/>
+  </connections>
+  <connections type="routesResponseTo" sourceAnchorX="0.512" sourceAnchorY="1.0" targetAnchorX="0.014925373134328358" targetAnchorY="0.5425531914893617">
+    <source href="assembly.xml#PdfPrintStep"/>
+    <target href="assembly.xml#AsyncMediation2"/>
+  </connections>
+</wdnm:Diagram>

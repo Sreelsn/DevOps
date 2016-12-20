@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+     xmlns="http://www.springframework.org/schema/beans"
+     xmlns:beans="http://www.springframework.org/schema/beans"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:cc="http://www.capeclear.com/assembly/10"
+     xmlns:cloud="urn:com.workday/esb/cloud/10.0"
+     xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+     xmlns:pi="urn:com.workday/picof"
+     xmlns:wd="urn:com.workday/bsvc"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ 
+	<cc:assembly id="WorkdayAssembly" version="20">
+        <cc:workday-in id="StartHere" routes-to="AsyncMediation">
+            <cc:integration-system name="INT_BIRT_Step_Test">
+        <cloud:param name="Employees">
+          <cloud:type>
+            <cloud:class-report-field description="Employees" type="WID" singular="false">aec2d7af85874a7b96dd23f4e8da95d3</cloud:class-report-field>
+          </cloud:type>
+          <cloud:default/>
+        </cloud:param>
+        <cloud:report-service name="BirtReport">
+          <cloud:report-alias description="Birt Test" name="BirtReport">
+            <cloud:report-reference description="Birt Test" type="WID">73bb00f41ab110ce12f0f2210656cf5b</cloud:report-reference>
+          </cloud:report-alias>
+        </cloud:report-service>
+      </cc:integration-system>
+        </cc:workday-in>
+        <cc:async-mediation id="ReportInput" routes-to="PdfPrintStep0">
+            <cc:steps>
+                <cc:log id="Log">
+                    <cc:log-message>
+                        <cc:text>&#xD;
+&#xD;
+&#xD;
+&#xD;
+*******************************&#xD;
+&#xD;
+&#xD;
+Agent&#xD;
+&#xD;
+&#xD;
+&#xD;
+********************************</cc:text>
+                    </cc:log-message>
+                </cc:log>
+                <cc:write id="ReportDesign" output="variable" output-variable="report.design1">
+                    <cc:message>
+                        <cc:static-file input-file="ReportDesign/Offer_Letter_Agent.rptdesign"/>
+                    </cc:message>
+                </cc:write>
+                <cc:log id="Log0" input="variable" input-variable="report.design1">
+                    <cc:log-message>
+                        <cc:text>&#xD;
+&#xD;
+&#xD;
+*************************************************************************</cc:text>
+                        <cc:message-content/>
+                        <cc:text>&#xD;
+&#xD;
+**************************************************************************&#xD;
+&#xD;
+Content&#xD;
+&#xD;
+@{vars['report.design1']}&#xD;
+&#xD;
+&#xD;
+**************************************************************************&#xD;
+&#xD;
+</cc:text>
+                    </cc:log-message>
+                </cc:log>
+            </cc:steps>
+        </cc:async-mediation>
+        <cc:local-out id="PdfPrintStep" routes-response-to="AsyncMediation2" endpoint="vm://wcc/PdfPrintStep" unset-properties="true"><cc:set name="pdf.report.design.variable" value="'report.design'"/><cc:set name="pdf.workday.report.variable" value="'report.output'"/></cc:local-out>
+        <cc:splitter id="Splitter">
+            <cc:sub-route name="SubRoute" routes-to="AsyncMediation0"/>
+            <cc:xml-stream-splitter namespaces="wd urn:com.workday.report/RFB_Offer_Letter" xpath="wd:Report_Data/wd:Report_Entry"/>
+        </cc:splitter>
+        <cc:async-mediation id="AsyncMediation0" routes-to="CallSubRoutine">
+            <cc:steps>
+                <cc:eval id="Eval">
+					
+					
+				<cc:expression>props['p.employee.id'] =parts[0].xpath('/wd:Report_Entry/wd:Emplid','wd urn:com.workday.report/RFB_Offer_Letter') </cc:expression><cc:expression>props['Employee_Type']=parts[0].xpath('/wd:Report_Entry/wd:Employee_Type','wd urn:com.workday.report/RFB_Offer_Letter') </cc:expression></cc:eval>
+                <cc:log id="Log">
+                    <cc:log-message>
+                        <cc:text>&#xD;
+&#xD;
+&#xD;
+***********************************************&#xD;
+&#xD;
+props['p.employee.id']  : @{props['p.employee.id'] }&#xD;
+&#xD;
+&#xD;
+props['Employee_Type'] :@{props['Employee_Type']}&#xD;
+&#xD;
+***********************************</cc:text>
+                    </cc:log-message>
+                </cc:log>
+                <cc:write id="Write" output="variable" output-variable="report.output">
+                    <cc:message>
+                        <cc:text>&lt;wd:Report_Data xmlns:wd=&quot;urn:com.workday.report/RFB_Offer_Letter&quot;></cc:text>
+                        <cc:message-content/>
+                        <cc:text>&lt;/wd:Report_Data></cc:text>
+                    </cc:message>
+                </cc:write>
+            </cc:steps>
+        </cc:async-mediation>
+        <cc:workday-out-rest id="WorkdayOutRest" routes-response-to="Splitter" extra-path="@{intsys.reportService.getExtrapath('BirtReport')}?Employees!WID=@{props['p.workers.ids']}&amp;format=simplexml"/>
+        <cc:async-mediation id="AsyncMediation" routes-to="WorkdayOutRest">
+            <cc:steps>
+                <cc:eval id="Eval"><cc:expression>props['p.workers'] =  lp.getReferenceDataList('Employees', 'WID')</cc:expression><cc:expression>props['p.workers.ids'] = props['p.workers']  != empty ? util.listToCommaDelimString(props['p.workers']).replace(',','!') : null</cc:expression></cc:eval>
+                <cc:log id="Log">
+                    <cc:log-message>
+                        <cc:text>&#xD;
+&#xD;
+&#xD;
+*************************************************&#xD;
+&#xD;
+props['p.workers']  : @{props['p.workers'] }&#xD;
+&#xD;
+&#xD;
+props['p.workers.ids']:@{props['p.workers.ids']}&#xD;
+&#xD;
+**************************************************</cc:text>
+                    </cc:log-message>
+                </cc:log>
+            </cc:steps>
+        </cc:async-mediation>
+        <cc:local-out id="CallSubRoutine" store-message="none" endpoint="vm://INT_BIRT_Step_Test/SubRoutine"/>
+        <cc:local-in id="SubRoutine" routes-to="Route"/>
+        <cc:route id="Route">
+            <cc:mvel-strategy>
+                <cc:choose-route expression="props['Employee_Type']=='Agent'" route="Agent"/>
+                <cc:choose-route expression="props['Employee_Type'] != 'Agent'" route="Regular"/>
+            </cc:mvel-strategy>
+            <cc:sub-route name="Agent" routes-to="ReportInput"/>
+            <cc:sub-route name="Regular" routes-to="ReportInput0"/>
+        </cc:route>
+        <cc:async-mediation id="ReportInput0" routes-to="PdfPrintStep">
+            <cc:steps>
+                <cc:log id="Log">
+                    <cc:log-message>
+                        <cc:text>&#xD;
+&#xD;
+&#xD;
+&#xD;
+*******************************&#xD;
+&#xD;
+&#xD;
+Employee&#xD;
+&#xD;
+&#xD;
+&#xD;
+********************************</cc:text>
+                    </cc:log-message>
+                </cc:log>
+                <cc:write id="ReportDesign" output="variable" output-variable="report.design">
+                    <cc:message>
+                        <cc:static-file input-file="ReportDesign/Offer_Letter.rptdesign"/>
+                    </cc:message>
+                </cc:write>
+                <cc:log id="Log0" input="variable" input-variable="report.design">
+                    <cc:log-message>
+                        <cc:text>&#xD;
+&#xD;
+&#xD;
+*************************************************************************</cc:text>
+                        <cc:message-content/>
+                        <cc:text>&#xD;
+&#xD;
+&#xD;
+&#xD;
+**************************************************************************&#xD;
+&#xD;
+Content&#xD;
+&#xD;
+@{vars['report.design']}&#xD;
+&#xD;
+&#xD;
+**************************************************************************</cc:text>
+                    </cc:log-message>
+                </cc:log>
+            </cc:steps>
+        </cc:async-mediation>
+        <cc:local-out id="PdfPrintStep0" routes-response-to="AsyncMediation1" endpoint="vm://wcc/PdfPrintStep" unset-properties="true">
+            
+            
+        <cc:set name="pdf.report.design.variable" value="'report.design1'"/><cc:set name="pdf.workday.report.variable" value="'report.output'"/></cc:local-out>
+        <cc:async-mediation id="AsyncMediation1">
+            <cc:steps>
+                <cc:store id="Store" output="variable" output-variable="Agent" title="agent.pdf"/>
+            </cc:steps>
+        </cc:async-mediation>
+        <cc:async-mediation id="AsyncMediation2">
+            <cc:steps>
+                <cc:store id="Store" output="variable" output-variable="Employee" title="Employee.pdf"/>
+            </cc:steps>
+        </cc:async-mediation>
+	</cc:assembly>
+
+</beans>
